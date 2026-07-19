@@ -10,15 +10,29 @@ Positionnement : **Consolidation + Agentique + Alignement au résultat**.
 - [`docs/specs/agent-leads-mvp.md`](docs/specs/agent-leads-mvp.md) — spec de bout en bout du premier agent du MVP : lead entrant → qualification → RDV → validation.
 - [`CLAUDE.md`](CLAUDE.md) — contexte, conventions et garde-fous pour les sessions Claude Code.
 
-## Code
+## L'application (MVP)
 
-Socle de l'agent Leads (MVP) en TypeScript strict :
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm test           # 31 tests (vitest)
+npm run typecheck
+```
+
+- **Tableau de bord** (`/`) — la file de validation (cartes de résultat : ✅ valider · ✏️ ajuster · ❌ rejeter) + le pipeline de leads avec score et raisons.
+- **Nouvelle annonce** (`/annonces`) — décrivez le bien, Balia rédige, le brouillon part en validation.
+- **Webhook leads** (`POST /api/webhooks/leads`) — point d'entrée des contacts (portails, site).
+- Sans `ANTHROPIC_API_KEY`, la génération bascule en mode démonstration ; avec la clé, Claude (Sonnet) rédige et qualifie.
+
+Structure :
 
 ```
-/agents/leads   machine à états, scoring, qualification (Claude Sonnet)
-/lib            clients et garde-fous (claude, messaging human-in-the-loop)
-/types          types partagés du domaine
-/tests          tests (vitest) : npm test · npm run typecheck
+/app            pages et routes API (Next.js)
+/components     UI réutilisable (dont la « carte de résultat »)
+/agents         micro-agents (leads : machine à états, scoring, qualification · annonces)
+/lib            clients et garde-fous (claude, messaging human-in-the-loop, store)
+/types          types partagés
+/tests          tests
 ```
 
 ## Stack cible
