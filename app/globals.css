@@ -1,0 +1,91 @@
+:root {
+  --bg: #f7f4ee;
+  --surface: #ffffff;
+  --ink: #22302b;
+  --muted: #6b7a73;
+  --line: #e4ded2;
+  --accent: #175c4c;
+  --accent-soft: #e3efe9;
+  --danger: #a83c2e;
+  --warn: #b07d2a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+a { color: var(--accent); text-decoration: none; }
+
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; }
+
+.shell { max-width: 980px; margin: 0 auto; padding: 0 20px 64px; }
+
+.topbar {
+  display: flex; align-items: baseline; gap: 28px;
+  padding: 22px 0 14px; border-bottom: 1px solid var(--line); margin-bottom: 28px;
+}
+.brand { font-family: Georgia, serif; font-size: 26px; color: var(--accent); letter-spacing: 0.5px; }
+.brand small { font-family: inherit; font-size: 12px; color: var(--muted); margin-left: 10px; letter-spacing: 0; }
+.topbar nav { display: flex; gap: 18px; margin-left: auto; font-size: 15px; }
+
+.section-title { font-size: 20px; margin: 30px 0 6px; }
+.section-hint { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 18px 20px; margin-bottom: 14px;
+}
+.card-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.card-title { font-weight: 600; font-size: 16px; }
+.card-when { color: var(--muted); font-size: 13px; margin-left: auto; }
+.card-context { color: var(--muted); font-size: 14px; margin: 8px 0 12px; }
+.card-body {
+  background: var(--accent-soft); border-radius: 8px; padding: 12px 14px;
+  font-size: 15px; white-space: pre-wrap;
+}
+.card textarea {
+  width: 100%; min-height: 110px; font: inherit; font-size: 15px;
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+}
+.card-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+button {
+  font: inherit; font-size: 14px; padding: 8px 16px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.danger { color: var(--danger); border-color: var(--danger); }
+button:disabled { opacity: 0.5; cursor: default; }
+
+.badge {
+  display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--muted); background: var(--surface);
+}
+.badge.hot { color: #fff; background: var(--danger); border-color: var(--danger); }
+.badge.warm { color: #fff; background: var(--warn); border-color: var(--warn); }
+.badge.accent { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+table.leads { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.leads th {
+  text-align: left; color: var(--muted); font-weight: 500; font-size: 13px;
+  padding: 8px 10px; border-bottom: 1px solid var(--line);
+}
+table.leads td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.reasons { color: var(--muted); font-size: 12.5px; }
+
+form.annonce { display: grid; gap: 14px; max-width: 560px; }
+form.annonce label { display: grid; gap: 4px; font-size: 14px; color: var(--muted); }
+form.annonce input, form.annonce select, form.annonce textarea {
+  font: inherit; font-size: 15px; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; background: var(--surface);
+}
+form.annonce .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.empty { color: var(--muted); font-size: 14px; padding: 18px; border: 1px dashed var(--line); border-radius: 10px; }
+.notice { background: var(--accent-soft); border-radius: 8px; padding: 12px 14px; font-size: 14px; margin-bottom: 16px; }
