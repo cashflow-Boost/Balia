@@ -10,6 +10,17 @@ Positionnement : **Consolidation + Agentique + Alignement au résultat**.
 - [`docs/specs/agent-leads-mvp.md`](docs/specs/agent-leads-mvp.md) — spec de bout en bout du premier agent du MVP : lead entrant → qualification → RDV → validation.
 - [`CLAUDE.md`](CLAUDE.md) — contexte, conventions et garde-fous pour les sessions Claude Code.
 
+## Code
+
+Socle de l'agent Leads (MVP) en TypeScript strict :
+
+```
+/agents/leads   machine à états, scoring, qualification (Claude Sonnet)
+/lib            clients et garde-fous (claude, messaging human-in-the-loop)
+/types          types partagés du domaine
+/tests          tests (vitest) : npm test · npm run typecheck
+```
+
 ## Stack cible
 
 Claude API (Sonnet/Opus) · Supabase (RLS, hébergement UE) · Vercel · Twilio · DocuSign · Stripe · TypeScript/React (Next.js).
