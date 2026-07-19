@@ -1,0 +1,16 @@
+# Secrets — ne jamais commiter
+.env
+.env.*
+!.env.example
+
+# Dépendances et builds
+node_modules/
+.next/
+out/
+dist/
+.vercel/
+
+# Divers
+.DS_Store
+*.log
+coverage/
