@@ -71,7 +71,10 @@ vocaux, jobs de relance).
       `/api/rendez-vous` (anti-double-booking), SMS de confirmation Twilio.
 - [x] **Auth + onboarding** : Supabase Auth (login/signup), wizard
       d'onboarding (Tome 16), cloisonnement RLS par entreprise.
-- [ ] Jour 3 — logo & couleurs, domaine `balia.fr`, Stripe (abo Pro 349 €).
+- [x] **Jour 3 — tarifs + Stripe** : page `/tarifs` (Tome 17, 3 paliers) +
+      `/api/checkout` (abonnement mensuel, essai 14 j sans CB). Se branche dès
+      que `STRIPE_SECRET_KEY` est renseignée.
+- [ ] Jour 3 — logo & couleurs définitifs, domaine `balia.fr`.
 
 ### Brancher les comptes externes (côté fondateur)
 

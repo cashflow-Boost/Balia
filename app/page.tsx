@@ -10,12 +10,20 @@ export default function Home() {
           <span className="text-2xl font-bold tracking-tight text-balia">
             Balia
           </span>
-          <Link
-            href="/dashboard"
-            className="text-sm font-medium text-balia-ink/70 hover:text-balia-ink"
-          >
-            Tableau de bord →
-          </Link>
+          <nav className="flex items-center gap-6">
+            <Link
+              href="/tarifs"
+              className="text-sm font-medium text-balia-ink/70 hover:text-balia-ink"
+            >
+              Tarifs
+            </Link>
+            <Link
+              href="/login"
+              className="text-sm font-medium text-balia-ink/70 hover:text-balia-ink"
+            >
+              Se connecter →
+            </Link>
+          </nav>
         </div>
       </header>
 
@@ -35,17 +43,17 @@ export default function Home() {
 
           <div className="mt-8 flex gap-4">
             <Link
-              href="/dashboard"
+              href="/login"
               className="rounded-lg bg-balia px-5 py-3 text-white font-medium hover:opacity-90"
             >
-              Voir le tableau de bord
+              Essai gratuit — 48h pour être live
             </Link>
-            <a
-              href="#comment"
+            <Link
+              href="/tarifs"
               className="rounded-lg border border-black/10 px-5 py-3 font-medium text-balia-ink hover:bg-black/5"
             >
-              Comment ça marche
-            </a>
+              Voir les tarifs
+            </Link>
           </div>
 
           <div
