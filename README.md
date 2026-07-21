@@ -8,6 +8,8 @@ Les documents fondateurs sont dans [`balia/`](balia/) :
 
 - [`balia/BIBLE.md`](balia/BIBLE.md) — Bible produit v1.0 (28 tomes + annexes).
 - [`balia/RUNBOOK.md`](balia/RUNBOOK.md) — runbook du sprint MVP 3 jours.
+- [`balia/GUIDE_DEPLOIEMENT.md`](balia/GUIDE_DEPLOIEMENT.md) — **mise en ligne
+  pas-à-pas** (Supabase, Vercel, Twilio, Vapi, Stripe, domaine).
 
 ## Stack
 
