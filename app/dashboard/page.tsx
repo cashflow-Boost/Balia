@@ -1,8 +1,48 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getDashboardStats } from "@/lib/dashboard";
 import type { ResultatAppel, Urgence } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
+
+function supabaseConfigured(): boolean {
+  return Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  );
+}
+
+/**
+ * Vérifie la session et l'onboarding. Retourne le nom de l'entreprise, ou
+ * redirige vers /login (non connecté) ou /onboarding (pas encore configuré).
+ * En preview sans Supabase, on saute l'auth et on montre le mode démo.
+ */
+async function requireArtisan(): Promise<string | null> {
+  if (!supabaseConfigured()) return null;
+
+  const { createClient } = await import("@/lib/supabase/server");
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: u } = await supabase
+    .from("utilisateurs")
+    .select("entreprise_id")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (!u?.entreprise_id) redirect("/onboarding");
+
+  const { data: ent } = await supabase
+    .from("entreprises")
+    .select("nom")
+    .eq("id", u.entreprise_id)
+    .maybeSingle();
+
+  return ent?.nom ?? null;
+}
 
 const euro = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -39,16 +79,30 @@ const urgenceLabel: Record<Urgence, string> = {
 };
 
 export default async function Dashboard() {
+  const entrepriseNom = await requireArtisan();
   const stats = await getDashboardStats();
 
   return (
     <main className="min-h-screen bg-black/[0.02]">
       <header className="border-b border-black/5 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-balia">
-            Balia
-          </Link>
-          <span className="text-sm text-balia-ink/50">Tableau de bord</span>
+          <div className="flex items-baseline gap-3">
+            <Link href="/" className="text-xl font-bold text-balia">
+              Balia
+            </Link>
+            {entrepriseNom && (
+              <span className="text-sm text-balia-ink/60">{entrepriseNom}</span>
+            )}
+          </div>
+          {supabaseConfigured() ? (
+            <form action="/auth/signout" method="post">
+              <button className="text-sm text-balia-ink/50 hover:text-balia-ink">
+                Se déconnecter
+              </button>
+            </form>
+          ) : (
+            <span className="text-sm text-balia-ink/50">Tableau de bord</span>
+          )}
         </div>
       </header>
 

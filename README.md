@@ -34,9 +34,13 @@ Le schéma (BIBLE Tome 13) est dans [`supabase/migrations/`](supabase/migrations
   `clients_finaux`, `rendez_vous`, `devis`, `relances`, `messages`,
   `abonnements`.
 - `0002_rls.sql` — Row Level Security : cloisonnement strict par entreprise.
+- `0003_harden_rls.sql` — durcissement : le helper `current_entreprise_id()`
+  passe dans un schéma `private` non exposé par l'API.
+- `0004_onboarding.sql` — RPC `onboard_entreprise` (amorçage du 1er artisan).
 
-Applique-les via le SQL Editor de Supabase (crée le projet en **région UE** —
-RGPD, Tome 22) ou via la CLI `supabase db push`.
+Ces migrations sont **déjà appliquées** sur le projet Supabase (région UE,
+RGPD Tome 22). Pour un nouvel environnement, applique-les dans l'ordre via le
+SQL Editor de Supabase ou la CLI `supabase db push`.
 
 ## Variables d'environnement
 
@@ -58,9 +62,26 @@ vocaux, jobs de relance).
 ## État du build (sprint 3 jours)
 
 - [x] **Jour 1 — squelette** : app Next.js déployable sur Vercel, schéma
-      Supabase (Tome 13) + RLS, landing (messaging Tome 21), dashboard « CA
-      récupéré » (Tome 24.6) en mode démo.
-- [ ] Jour 1 — agent vocal (Vapi/Retell + numéro Twilio + prompt Tome 28).
-- [ ] Jour 2 — qualification → écriture `appels`, prise de créneau, SMS de
-      confirmation, dashboard sur données réelles.
-- [ ] Jour 3 — logo & couleurs, onboarding, domaine `balia.fr`, Stripe.
+      Supabase (Tome 13) + RLS **appliqués sur la base UE**, landing
+      (messaging Tome 21), dashboard « CA récupéré » (Tome 24.6).
+- [x] **Jour 1 — agent vocal (côté code)** : webhook `/api/vocal/webhook`
+      (parse Vapi/Retell), prompts agent (Tome 28). *Reste à brancher : compte
+      Vapi/Retell + numéro Twilio + clé Fable 5.*
+- [x] **Jour 2 — RDV + agenda + SMS** : `/api/disponibilites`,
+      `/api/rendez-vous` (anti-double-booking), SMS de confirmation Twilio.
+- [x] **Auth + onboarding** : Supabase Auth (login/signup), wizard
+      d'onboarding (Tome 16), cloisonnement RLS par entreprise.
+- [ ] Jour 3 — logo & couleurs, domaine `balia.fr`, Stripe (abo Pro 349 €).
+
+### Brancher les comptes externes (côté fondateur)
+
+Le code est prêt ; il attend les clés dans les variables d'environnement
+(`.env.local` en local, Vercel en prod) :
+
+- **Supabase** : URL + clé anon → ✅ branché. Ajouter `SUPABASE_SERVICE_ROLE_KEY`
+  (Settings → API) pour activer le webhook vocal.
+- **Twilio / Vapi (ou Retell)** : comptes à créer, numéro à acheter, clé
+  Fable 5 à coller côté plateforme vocale, webhook → `/api/vocal/webhook`.
+- **Note auth** : pour un onboarding « live en 48h » sans friction, désactive
+  la confirmation e-mail dans Supabase (Auth → Providers → Email) ou garde-la
+  selon ta préférence.
