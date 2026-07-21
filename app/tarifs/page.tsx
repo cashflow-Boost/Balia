@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PLANS, type PlanId } from "@/lib/plans";
+import { Logo } from "@/components/Logo";
 
 export default function TarifsPage() {
   const [loading, setLoading] = useState<PlanId | null>(null);
@@ -39,8 +40,8 @@ export default function TarifsPage() {
     <main className="min-h-screen bg-black/[0.02]">
       <header className="border-b border-black/5 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-balia">
-            Balia
+          <Link href="/">
+            <Logo />
           </Link>
           <Link
             href="/login"

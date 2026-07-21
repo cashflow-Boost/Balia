@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 
 // Landing minimale — messaging BIBLE Tome 21.
 // Promesse de marque : « Ne ratez plus jamais un client. »
@@ -7,9 +8,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col">
       <header className="border-b border-black/5">
         <div className="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tight text-balia">
-            Balia
-          </span>
+          <Logo />
           <nav className="flex items-center gap-6">
             <Link
               href="/tarifs"

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { Logo } from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -52,8 +53,8 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 bg-black/[0.02]">
-      <Link href="/" className="mb-8 text-2xl font-bold text-balia">
-        Balia
+      <Link href="/" className="mb-8">
+        <Logo size={32} />
       </Link>
 
       <div className="w-full max-w-sm rounded-2xl bg-white border border-black/5 p-8">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Logo } from "@/components/Logo";
 import { getDashboardStats } from "@/lib/dashboard";
 import type { ResultatAppel, Urgence } from "@/lib/types";
 
@@ -87,8 +88,8 @@ export default async function Dashboard() {
       <header className="border-b border-black/5 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
           <div className="flex items-baseline gap-3">
-            <Link href="/" className="text-xl font-bold text-balia">
-              Balia
+            <Link href="/">
+              <Logo />
             </Link>
             {entrepriseNom && (
               <span className="text-sm text-balia-ink/60">{entrepriseNom}</span>
